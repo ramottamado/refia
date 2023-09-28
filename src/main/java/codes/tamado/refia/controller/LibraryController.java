@@ -6,12 +6,15 @@ import codes.tamado.refia.common.CommonReturnType;
 import codes.tamado.refia.dto.BookDto;
 import codes.tamado.refia.service.BookService;
 import io.swagger.v3.oas.annotations.Hidden;
+import jakarta.validation.constraints.NotBlank;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,9 +63,18 @@ public class LibraryController {
   }
 
   @PostMapping(path = "/addNewBook")
-  @ResponseStatus(HttpStatus.ACCEPTED)
+  @ResponseStatus(HttpStatus.CREATED)
   public @ResponseBody CommonReturnType<BookDto> addNewBook(
       @RequestBody @NotNull @Validated BookDto bookDto) {
     return CommonReturnType.create(service.addNewBook(bookDto));
+  }
+
+  @DeleteMapping(path = "/deleteBook/{code}")
+  @ResponseStatus(HttpStatus.OK)
+  public @ResponseBody CommonReturnType<Object> deleteBook(
+      @PathVariable("code") @NotBlank @Validated String code) {
+    service.deleteBook(code);
+
+    return CommonReturnType.create("OK.");
   }
 }

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -14,10 +13,10 @@ import jakarta.validation.constraints.Size;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record BookDto(
-    @NotNull @NotEmpty @NotBlank String code,
-    @NotNull @NotEmpty @NotBlank String title,
-    @NotNull @NotEmpty @NotBlank String categoryName,
-    @NotNull @NotEmpty @NotBlank String publisherName,
+    @NotBlank String code,
+    @NotBlank String title,
+    @NotBlank String categoryName,
+    @NotBlank String publisherName,
     @NotNull @Size(min = 1) Set<AuthorDto> authors,
     @NotNull Long year) implements Serializable {
   /**

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1695890314784-1" author="ramot (generated)">
+        <createIndex indexName="idx_book_category_id_unq" tableName="book">
+            <column name="category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1695890314784-2" author="ramot (generated)">
+        <createIndex indexName="idx_book_year_" tableName="book">
+            <column name="year_"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

@@ -49,4 +49,11 @@ public class BookService {
 
     return mapper.toDto(result);
   }
+
+  public void deleteBook(String code) {
+    // BookDto bookDto = mapper.toDto(
+    //     repository.findById(code).orElseThrow(() -> new RuntimeException("Book not found.")));
+
+    repository.deleteById(code);
+  }
 }

@@ -5,20 +5,17 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1695811885497-1" author="ramot (generated)">
-        <createSequence incrementBy="50" sequenceName="author_seq" startValue="1"/>
+    <changeSet id="1695890086558-1" author="ramot (generated)">
+        <createSequence incrementBy="50" schemaName="public" sequenceName="author_seq" startValue="1"/>
     </changeSet>
-    <changeSet id="1695811885497-2" author="ramot (generated)">
-        <createSequence incrementBy="50" schemaName="public" sequenceName="book_seq" startValue="1"/>
-    </changeSet>
-    <changeSet id="1695811885497-3" author="ramot (generated)">
+    <changeSet id="1695890086558-2" author="ramot (generated)">
         <createSequence incrementBy="50" schemaName="public" sequenceName="category_seq" startValue="1"/>
     </changeSet>
-    <changeSet id="1695811885497-4" author="ramot (generated)">
+    <changeSet id="1695890086558-3" author="ramot (generated)">
         <createSequence incrementBy="50" schemaName="public" sequenceName="publisher_seq" startValue="1"/>
     </changeSet>
-    <changeSet id="1695811885497-5" author="ramot (generated)">
-        <createTable tableName="author">
+    <changeSet id="1695890086558-4" author="ramot (generated)">
+        <createTable schemaName="public" tableName="author">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_author"/>
             </column>
@@ -26,13 +23,10 @@
             <column name="last_name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1695811885497-6" author="ramot (generated)">
+    <changeSet id="1695890086558-5" author="ramot (generated)">
         <createTable schemaName="public" tableName="book">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_book"/>
-            </column>
             <column name="code" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_book"/>
             </column>
             <column name="title" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -51,17 +45,17 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1695811885497-7" author="ramot (generated)">
+    <changeSet id="1695890086558-6" author="ramot (generated)">
         <createTable schemaName="public" tableName="book_authors">
             <column name="authors_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_book_authors"/>
             </column>
-            <column name="book_id" type="BIGINT">
+            <column name="book_code" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_book_authors"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1695811885497-8" author="ramot (generated)">
+    <changeSet id="1695890086558-7" author="ramot (generated)">
         <createTable schemaName="public" tableName="category">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_category"/>
@@ -71,7 +65,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1695811885497-9" author="ramot (generated)">
+    <changeSet id="1695890086558-8" author="ramot (generated)">
         <createTable schemaName="public" tableName="publisher">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_publisher"/>
@@ -81,16 +75,13 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1695811885497-10" author="ramot (generated)">
-        <addUniqueConstraint columnNames="code" constraintName="uc_book_code" schemaName="public" tableName="book"/>
-    </changeSet>
-    <changeSet id="1695811885497-11" author="ramot (generated)">
+    <changeSet id="1695890086558-9" author="ramot (generated)">
         <addUniqueConstraint columnNames="name"
                              constraintName="uc_category_name"
                              schemaName="public"
                              tableName="category"/>
     </changeSet>
-    <changeSet id="1695811885497-12" author="ramot (generated)">
+    <changeSet id="1695890086558-10" author="ramot (generated)">
         <addForeignKeyConstraint baseColumnNames="category_id"
                                  baseTableName="book"
                                  baseTableSchemaName="public"
@@ -99,7 +90,7 @@
                                  referencedTableName="category"
                                  referencedTableSchemaName="public"/>
     </changeSet>
-    <changeSet id="1695811885497-13" author="ramot (generated)">
+    <changeSet id="1695890086558-11" author="ramot (generated)">
         <addForeignKeyConstraint baseColumnNames="publisher_id"
                                  baseTableName="book"
                                  baseTableSchemaName="public"
@@ -108,20 +99,21 @@
                                  referencedTableName="publisher"
                                  referencedTableSchemaName="public"/>
     </changeSet>
-    <changeSet id="1695811885497-14" author="ramot (generated)">
+    <changeSet id="1695890086558-12" author="ramot (generated)">
         <addForeignKeyConstraint baseColumnNames="authors_id"
                                  baseTableName="book_authors"
                                  baseTableSchemaName="public"
                                  constraintName="fk_booaut_on_author"
                                  referencedColumnNames="id"
-                                 referencedTableName="author"/>
+                                 referencedTableName="author"
+                                 referencedTableSchemaName="public"/>
     </changeSet>
-    <changeSet id="1695811885497-15" author="ramot (generated)">
-        <addForeignKeyConstraint baseColumnNames="book_id"
+    <changeSet id="1695890086558-13" author="ramot (generated)">
+        <addForeignKeyConstraint baseColumnNames="book_code"
                                  baseTableName="book_authors"
                                  baseTableSchemaName="public"
                                  constraintName="fk_booaut_on_book"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="code"
                                  referencedTableName="book"
                                  referencedTableSchemaName="public"/>
     </changeSet>
