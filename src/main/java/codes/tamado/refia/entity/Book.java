@@ -66,7 +66,7 @@ public class Book {
     return code;
   }
 
-  public void setCode(String code) {
+  public void setCode(final String code) {
     this.code = code;
   }
 
