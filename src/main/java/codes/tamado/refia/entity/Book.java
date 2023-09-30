@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 
 @Entity
@@ -59,8 +60,12 @@ public class Book {
   @Column(name = "year_", nullable = false) private Long year;
 
   @CreationTimestamp
-  @Column(name = "insert_date", nullable = false)
+  @Column(name = "insert_date", nullable = false, updatable = false)
   private Instant insertDate;
+
+  @UpdateTimestamp
+  @Column(name = "last_update_date", nullable = false)
+  private Instant lastUpdateDate;
 
   public String getCode() {
     return code;
@@ -116,5 +121,13 @@ public class Book {
 
   public void setInsertDate(final Instant insertDate) {
     this.insertDate = insertDate;
+  }
+
+  public Instant getLastUpdateDate() {
+    return lastUpdateDate;
+  }
+
+  public void setLastUpdateDate(final Instant lastUpdateDate) {
+    this.lastUpdateDate = lastUpdateDate;
   }
 }
