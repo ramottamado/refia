@@ -1,6 +1,5 @@
 package codes.tamado.refia.entity;
 
-import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -14,7 +13,7 @@ import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "category", schema = "public")
-public class Category extends BaseEntity implements Serializable {
+public class Category extends BaseEntity {
   @Column(name = "name", nullable = false, unique = true)
   @JdbcTypeCode(SqlTypes.VARCHAR)
   private String name;

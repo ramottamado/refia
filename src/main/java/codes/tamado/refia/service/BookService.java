@@ -72,6 +72,9 @@ public class BookService {
     _book.setYear(book.getYear());
     _book.setAuthors(new LinkedHashSet<>());
 
+    _book.setCategory(book.getCategory());
+    _book.setPublisher(book.getPublisher());
+
     categoryRepository.findByName(book.getCategory().getName())
         .ifPresent(_book::setCategory);
 
