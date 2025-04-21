@@ -2,6 +2,7 @@ package codes.tamado.refia.mapper;
 
 import codes.tamado.refia.dto.BookDto;
 import codes.tamado.refia.entity.Book;
+
 import org.mapstruct.BeanMapping;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;

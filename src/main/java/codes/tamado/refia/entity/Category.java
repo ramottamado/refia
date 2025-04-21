@@ -1,13 +1,14 @@
 package codes.tamado.refia.entity;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import codes.tamado.refia.entity.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import codes.tamado.refia.entity.base.BaseEntity;
+
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 

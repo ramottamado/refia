@@ -1,15 +1,22 @@
 package codes.tamado.refia.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 /**
  * DTO for {@link codes.tamado.refia.entity.Book}
+ *
+ * @param code          book code
+ * @param title         book title
+ * @param categoryName  category name
+ * @param publisherName publisher name
+ * @param authors       authors
+ * @param year          year of publication
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record BookDto(
@@ -19,8 +26,12 @@ public record BookDto(
     @NotBlank String publisherName,
     @NotNull @Size(min = 1) Set<AuthorDto> authors,
     @NotNull Long year) implements Serializable {
+
   /**
    * DTO for {@link codes.tamado.refia.entity.Author}
+   *
+   * @param firstName first name
+   * @param lastName  last name
    */
   @JsonIgnoreProperties(ignoreUnknown = true)
   public record AuthorDto(String firstName, String lastName) implements Serializable {}

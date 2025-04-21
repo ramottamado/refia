@@ -10,6 +10,7 @@ import codes.tamado.refia.repository.AuthorRepository;
 import codes.tamado.refia.repository.BookRepository;
 import codes.tamado.refia.repository.CategoryRepository;
 import codes.tamado.refia.repository.PublisherRepository;
+
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,7 +84,7 @@ public class BookService {
 
     book.getAuthors().stream()
         .map(author -> authorRepository
-            .findByFirstNameAndLastName(author.getFirstName(), author.getLastName())
+            .findByName(author.getName(), author.getName())
             .orElse(author))
         .forEach(author -> _book.getAuthors().add(author));
 

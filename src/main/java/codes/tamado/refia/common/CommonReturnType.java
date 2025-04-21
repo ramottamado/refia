@@ -1,6 +1,7 @@
 package codes.tamado.refia.common;
 
 import codes.tamado.refia.common.serde.JsonSerializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jetbrains.annotations.NotNull;
 
