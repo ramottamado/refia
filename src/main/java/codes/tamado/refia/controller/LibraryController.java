@@ -5,6 +5,7 @@ import java.util.List;
 
 import codes.tamado.refia.common.CommonReturnType;
 import codes.tamado.refia.dto.BookDto;
+import codes.tamado.refia.dto.StatusDto;
 import codes.tamado.refia.service.BookService;
 
 import io.swagger.v3.oas.annotations.Hidden;
@@ -38,15 +39,15 @@ public class LibraryController {
   @Hidden
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @RequestMapping(path = "/error")
-  public @ResponseBody CommonReturnType<Object> handleError() {
-    return CommonReturnType.create("Error.", service.handleError());
+  public @ResponseBody CommonReturnType<StatusDto> handleError() {
+    return CommonReturnType.create(service.handleError());
   }
 
   @Hidden
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  public CommonReturnType<Object> handleException(Exception e) {
-    return CommonReturnType.create("Error.", service.handleException(e));
+  public CommonReturnType<StatusDto> handleException(Exception e) {
+    return CommonReturnType.create(service.handleException(e));
   }
 
   @GetMapping(path = "/title")
@@ -72,10 +73,10 @@ public class LibraryController {
 
   @DeleteMapping(path = "/deleteBook/{code}")
   @ResponseStatus(HttpStatus.OK)
-  public @ResponseBody CommonReturnType<Object> deleteBook(
+  public @ResponseBody CommonReturnType<StatusDto> deleteBook(
       @PathVariable("code") @NotBlank @Validated String code) {
     service.deleteBook(code);
 
-    return CommonReturnType.create("OK.");
+    return CommonReturnType.create(new StatusDto("Deleted."));
   }
 }

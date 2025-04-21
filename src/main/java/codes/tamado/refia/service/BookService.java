@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 import codes.tamado.refia.dto.BookDto;
+import codes.tamado.refia.dto.StatusDto;
 import codes.tamado.refia.entity.Book;
 import codes.tamado.refia.mapper.BookMapper;
 import codes.tamado.refia.repository.AuthorRepository;
@@ -12,15 +13,12 @@ import codes.tamado.refia.repository.CategoryRepository;
 import codes.tamado.refia.repository.PublisherRepository;
 
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookService {
-  private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
   private final AuthorRepository authorRepository;
   private final BookRepository bookRepository;
   private final CategoryRepository categoryRepository;
@@ -42,17 +40,12 @@ public class BookService {
     this.mapper = mapper;
   }
 
-  public @NotNull Object handleError() {
-    return new Object() {
-      public final String status = "Not found.";
-    };
+  public @NotNull StatusDto handleError() {
+    return new StatusDto("Not found.");
   }
 
-  public @NotNull Object handleException(@NotNull Exception e) {
-    return new Object() {
-      public final String status = "Error.";
-      public final String reason = e.getMessage();
-    };
+  public @NotNull StatusDto handleException(@NotNull Exception e) {
+    return new StatusDto("Error.", e.getMessage());
   }
 
   public List<BookDto> findBook(String title) {
@@ -84,7 +77,7 @@ public class BookService {
 
     book.getAuthors().stream()
         .map(author -> authorRepository
-            .findByName(author.getName(), author.getName())
+            .findByName(author.getName())
             .orElse(author))
         .forEach(author -> _book.getAuthors().add(author));
 

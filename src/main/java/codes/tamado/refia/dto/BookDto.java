@@ -30,9 +30,8 @@ public record BookDto(
   /**
    * DTO for {@link codes.tamado.refia.entity.Author}
    *
-   * @param firstName first name
-   * @param lastName  last name
+   * @param name author name
    */
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public record AuthorDto(String firstName, String lastName) implements Serializable {}
+  public record AuthorDto(String name) implements Serializable {}
 }
